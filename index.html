@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Game</title>
+  <style>
+    .game{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50%;
+      padding: 15px;
+      transform: translate(-50%, -50%);
+      background-color: aquamarine;
+      text-align: justify;
+    }
+    h3{
+      text-align: center;
+      margin-top: 10px;
+      font-family: fantasy;
+      letter-spacing: 1px;
+    }
+    p{
+      color: red;
+      font-family: cursive;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    input{
+      outline: none;
+      width: 80%;
+      text-align: center;
+      padding: 5px;
+      border-radius: 10px;
+    }
+    button{
+      outline: none;
+      padding: 5px;
+    }
+    ul{
+      font-family: 'Courier New', Courier, monospace;
+    }
+    li{
+      list-style-type: "-> ";
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game">
+      <p>
+        Let's play rock,paper,scissor Game! take a choice : 's' or 'r' or 'p' <br>
+        <ul>
+          <li>'r' beat 's'</li>
+          <li>'p' beat 'r'</li>
+          <li>'s' beat 'p'</li>
+        </ul>
+
+      </p>
+      <input type="text" maxlength="1" id="choice" placeholder="your choice..">
+      <button id="verify">Play!</button>
+
+      <div id="result"><!-- result here --></div>
+  </div>
+
+  
+
+  <script>
+    function generateChoice(){
+      var choices = ['r' , 's' , 'p'];
+      var rand = Math.floor( Math.random()*3);
+      var choice = choices[rand];
+      return choice;
+    } 
+      verify.addEventListener('click', () => { 
+        const playerChoice = document.getElementById('choice');
+        const verify = document.getElementById('verify');
+        if( playerChoice.value === '')
+        {
+          alert('please pick a choice first !');
+        }
+        else{
+          const result = document.getElementById('result');
+          var player = playerChoice.value.toLowerCase();
+          var pc = generateChoice();
+          if( player === pc)
+          {
+            result.innerHTML = ` <p> Player : ${player} | PC : ${pc}</p> <h3> Equality </h3>`;
+          }
+          //--------------------- Player WIN ------------------------//
+          else if( (player === 's' && pc === 'p') || (player === 'r' && pc === 's') || (player === 'p' && pc === 'r'))
+          {
+            result.innerHTML = ` <p> Player : ${player} | PC : ${pc}</p> <h3> You win! </h1>`;
+          }
+          //-------------------- Player LOSE ------------------------//
+          else{
+            result.innerHTML = ` <p> Player : ${player} | PC : ${pc}</p> <h3> You Lose! </h1>`;
+          } 
+        }
+        playerChoice.value = '';
+      });
+ 
+  </script>
+
+</body>
+</html>
